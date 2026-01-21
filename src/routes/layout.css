@@ -1,2 +1,30 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
+@import "tailwindcss";
+@import "@fontsource-variable/figtree";
+
+@theme {
+    --font-sans: "Figtree Variable";
+}
+
+body {
+    @apply bg-slate-200;
+}
+
+.btn {
+    @apply px-4 py-2.75 inline-flex items-center gap-2 rounded-md font-bold hover:cursor-pointer transition;
+}
+
+.btn.primary {
+    @apply bg-purple-600 text-white hover:bg-purple-700;
+}
+
+.btn.secondary {
+    @apply bg-slate-200 text-purple-800 border border-slate-400 hover:bg-slate-300;
+}
+
+.btn.ghost {
+    @apply hover:bg-slate-300;
+}
+
+input[type="text"] {
+    @apply bg-slate-100 px-4 py-2 w-full border border-slate-400 rounded-lg focus:outline-0 focus:ring-2 focus:ring-purple-400 transition hover:bg-slate-200;
+}
