@@ -1,5 +1,6 @@
 <script lang="ts">
     import Icon from "@iconify/svelte";
+    import {resolve} from "$app/paths";
 </script>
 
 <section
@@ -34,9 +35,9 @@
             <button class="btn primary">
                 <Icon icon="tabler:external-link" /> Visit Source
             </button>
-            <button class="btn secondary">
+            <a href={resolve("/list")} class="btn secondary">
                 <Icon icon="tabler:bookmark-filled" /> Save to Favourites
-            </button>
+            </a>
         </div>
     </div>
 

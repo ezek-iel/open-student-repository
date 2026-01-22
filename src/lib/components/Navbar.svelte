@@ -1,6 +1,7 @@
 <script lang="ts">
     import logo from "$lib/assets/logo.svg";
     import Icon from "@iconify/svelte";
+    import {resolve} from "$app/paths";
 </script>
 
 <nav>
@@ -13,8 +14,8 @@
     <ul class="link-list">
         <li class="btn ghost">Browse</li>
         <li>
-            <a href="/" class="btn primary">
-                <Icon icon="tabler:plus" /> Submit a resource
+            <a href={resolve("/")} class="btn primary">
+                <Icon icon="tabler:plus" /> Submit Resource
             </a>
         </li>
     </ul>
