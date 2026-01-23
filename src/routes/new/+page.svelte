@@ -14,7 +14,7 @@
         </p>
     </div>
 
-    <form class=" resource-form">
+    <form class="resource-form">
         <fieldset>
             <p class="title">General Information</p>
 
@@ -138,7 +138,7 @@
     }
 
     .resource-form {
-        @apply lg:p-12 bg-slate-100 p-8 space-y-16 rounded-lg border border-slate-300;
+        @apply lg:p-12 bg-slate-100 p-8 space-y-16 rounded-lg xl:rounded-xl border border-slate-300 xl:shadow-lg;
 
         & fieldset {
             @apply space-y-10;
