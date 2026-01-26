@@ -14,3 +14,10 @@ export interface Resource {
   source: string;
   date: string;
 }
+
+export type ResourceType = "video" | "research paper" | "courses" | "textbooks";
+
+export interface Operation {
+  type: "Success" | "Failure";
+  message: string;
+}

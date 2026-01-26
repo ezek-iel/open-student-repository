@@ -2,6 +2,7 @@
     import Icon from "@iconify/svelte";
     import { resolve } from "$app/paths";
     import type { Resource } from "$lib/types";
+    import { parseDate } from "$lib/utils";
 
     let { course }: { course: Resource } = $props();
 </script>
@@ -32,17 +33,17 @@
             </p>
             <p class="resource-info ml-6">
                 <Icon icon="tabler:calendar-event-filled" />
-                {course.date}
+                {parseDate(course.date)}
             </p>
         </div>
 
         <div class="flex items-center gap-4 flex-wrap">
-            <button class="btn primary">
+            <a href={resolve("/")} class="btn primary">
                 <Icon icon="tabler:external-link" /> Visit Source
-            </button>
-            <a href={resolve("/list")} class="btn secondary">
-                <Icon icon="tabler:bookmark-filled" /> Save to Favourites
             </a>
+            <button class="btn secondary">
+                <Icon icon="tabler:bookmark-filled" /> Save to Favourites
+            </button>
         </div>
     </div>
 

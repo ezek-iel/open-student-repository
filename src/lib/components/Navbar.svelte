@@ -1,11 +1,15 @@
 <script lang="ts">
-    import logo from "$lib/assets/logo.svg";
+    import logoFull from "$lib/assets/logo-full.svg";
+    import logoShort from "$lib/assets/logo-short.svg";
     import Icon from "@iconify/svelte";
-    import {resolve} from "$app/paths";
+    import { resolve } from "$app/paths";
 </script>
 
 <nav>
-    <img src={logo} alt="" class="h-7" />
+    <a href={resolve("/")}>
+        <img src={logoFull} alt="" class="hidden lg:block h-12" />
+        <img src={logoShort} alt="" class="lg:hidden h-12" />
+    </a>
 
     <div class="relative w-6/12">
         <input type="text" placeholder="Search Resources" />
@@ -14,7 +18,7 @@
     <ul class="link-list">
         <li class="btn ghost">Browse</li>
         <li>
-            <a href={resolve("/")} class="btn primary">
+            <a href={resolve("/new")} class="btn primary">
                 <Icon icon="tabler:plus" /> Submit Resource
             </a>
         </li>
@@ -25,7 +29,7 @@
     @reference 'tailwindcss';
 
     nav {
-        @apply flex justify-between items-center py-6 px-4 gap-4 border-b border-slate-300 md:px-8 lg:px-20 xl:px-40;
+        @apply flex justify-between items-center py-6 px-4 gap-4 border-b border-slate-300 md:px-8 lg:px-20 xl:px-32;
     }
 
     .link-list {

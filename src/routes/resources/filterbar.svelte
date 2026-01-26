@@ -79,7 +79,7 @@
     section[data-visible="false"] {
         display: none;
         transform: translateX(0px);
-        transition: transform 75ms;
+        transition: transform 200ms;
 
         @media (width >= 64rem) {
             display: block;

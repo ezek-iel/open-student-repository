@@ -40,6 +40,7 @@
 	},
 	"dependencies": {
 		"@fontsource-variable/figtree": "^5.2.10",
-		"@iconify/svelte": "^5.2.1"
+		"@iconify/svelte": "^5.2.1",
+		"moment": "^2.30.1"
 	}
 }

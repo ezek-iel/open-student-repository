@@ -1,6 +1,6 @@
 <script lang="ts">
     import Icon from "@iconify/svelte";
-    import CourseCard from "./coursecard.svelte";
+    import ResourceCard from "./resourcecard.svelte";
     let isFilterBarVisible = $state(false);
     import type { Resource } from "$lib/types";
 
@@ -27,7 +27,7 @@
 
     <div class="cards-container mt-8 md:mt-12">
         {#each resources as resource, index (index)}
-            <CourseCard {resource} />
+            <ResourceCard {resource} />
         {/each}
     </div>
 </section>

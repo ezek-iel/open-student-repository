@@ -1,0 +1,1 @@
+ALTER TABLE `resource` ADD `verified` text DEFAULT 'false' NOT NULL;

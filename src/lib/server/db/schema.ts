@@ -2,6 +2,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const Resource = sqliteTable("resource", {
   id: integer().primaryKey(),
+  verified: text("verified").notNull().default("false"),
   name: text("name").notNull(),
   link: text("link").notNull(),
   details: text("details").notNull(),
