@@ -11,9 +11,13 @@
         <img src={logoShort} alt="" class="lg:hidden h-12" />
     </a>
 
-    <div class="relative w-6/12">
-        <input type="text" placeholder="Search Resources" />
-    </div>
+    <form method="GET" action="/resources" class="flex gap-2 w-6/12">
+        <input type="text" name="q" placeholder="Search Resources" />
+
+        <button class="btn primary search-btn" type="submit"
+            ><Icon icon="tabler:search" />Search</button
+        >
+    </form>
 
     <ul class="link-list">
         <li class="btn ghost">Browse</li>

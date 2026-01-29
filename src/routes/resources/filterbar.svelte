@@ -1,7 +1,39 @@
+<script module>
+    export { type FilterOptions };
+</script>
+
 <script lang="ts">
     import Icon from "@iconify/svelte";
+    import type { Resource, ResourceLevel, ResourceType } from "$lib/types";
+    import { group } from "node:console";
 
-    let { isVisible }: { isVisible: boolean } = $props();
+    let {
+        isVisible,
+        resources,
+        filterOptions = $bindable(),
+    }: {
+        isVisible: boolean;
+        resources: Resource[];
+        filterOptions: FilterOptions;
+    } = $props();
+
+    function getCountofType(
+        type: "course" | "video" | "research paper",
+    ): number {
+        const count = resources.filter((r) => r.type === type);
+        return count.length;
+    }
+
+    let currentLevel: Array<ResourceLevel> & "" = $state("");
+    
+    $effect(function ()  {
+      filterOptions.level = currentLevel as Array<ResourceLevel>
+    })
+
+    interface FilterOptions {
+        level: Array<ResourceLevel>;
+        type: ResourceType;
+    }
 </script>
 
 <section class="filter-container" data-visible={isVisible}>
@@ -9,11 +41,12 @@
         <p class="title">Resource Level</p>
         <ul class="level-selection mt-8">
             <li>
-                Beginner <input type="checkbox" />
+                Beginner <input type="checkbox" bind:group={currentLevel} value="beginner"/>
             </li>
-            <li>Intermediate <input type="checkbox" /></li>
-            <li>Graduate <input type="checkbox" /></li>
-            <li>Advanced <input type="checkbox" /></li>
+            <li>
+                Intermediate <input type="checkbox" bind:group={currentLevel} value="intermediate"/>
+            </li>
+            <li>Advanced <input type="checkbox" bind:group={currentLevel} value="advanced"/></li>
         </ul>
         <button class="btn secondary w-full mt-8"
             ><Icon icon="tabler:reload" class="size-6" />Refresh</button
@@ -24,19 +57,19 @@
         <p class="title">Resource Type</p>
         <ul class="type-selection mt-12">
             <li>
-                <Icon icon="tabler:book" class="size-6" />
-                <p>Textbooks</p>
-                <p class="tag">200</p>
+                <Icon icon="tabler:photo-video" class="size-6" />
+                <p>Courses</p>
+                <p class="tag">{getCountofType("course")}</p>
             </li>
             <li>
                 <Icon icon="tabler:video" class="size-6" />
-                <p>Video Courses</p>
-                <p class="tag">13</p>
+                <p>Videos</p>
+                <p class="tag">{getCountofType("video")}</p>
             </li>
             <li>
-                <Icon icon="tabler:slides" class="size-6" />
-                <p>Slides</p>
-                <p class="tag">510</p>
+                <Icon icon="tabler:file-text" class="size-6" />
+                <p>Research Papers</p>
+                <p class="tag">{getCountofType("research paper")}</p>
             </li>
         </ul>
     </div>
@@ -73,7 +106,7 @@
     }
 
     section.filter-container {
-        @apply space-y-16 lg:px-4 w-92 lg:block  bg-slate-100 fixed z-1 sm:h-full sm:inset-0 sm:pt-20 sm:px-8 sm:shadow-lg lg:sticky lg:bg-[initial] lg:shadow-none;
+        @apply bg-slate-100 shadow-lg fixed z-2 inset-0 w-84 py-16 px-4 space-y-12 lg:sticky lg:shadow-none lg:p-0 lg:bg-transparent;
     }
 
     section[data-visible="false"] {

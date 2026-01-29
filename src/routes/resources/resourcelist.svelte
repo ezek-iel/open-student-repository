@@ -1,10 +1,12 @@
 <script lang="ts">
     import Icon from "@iconify/svelte";
     import ResourceCard from "./resourcecard.svelte";
-    let isFilterBarVisible = $state(false);
     import type { Resource } from "$lib/types";
 
-    let { resources }: { resources: Resource[] } = $props();
+    let {
+        resources,
+        filterBarVisible = $bindable(false),
+    }: { resources: Resource[]; filterBarVisible: boolean } = $props();
 </script>
 
 <section class="w-full md:px-8 xl:px-12">
@@ -17,7 +19,7 @@
             <button
                 class="icon-btn secondary lg:hidden"
                 onclick={() => {
-                    isFilterBarVisible = !isFilterBarVisible;
+                    filterBarVisible = !filterBarVisible;
                 }}
             >
                 <Icon icon="tabler:filter" />

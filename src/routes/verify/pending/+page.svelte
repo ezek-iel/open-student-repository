@@ -4,4 +4,4 @@
     let { data } = $props();
 </script>
 
-<ResourcesTable resources={data.resources} />
+<ResourcesTable resources={data.resources} tableState="Pending"/>

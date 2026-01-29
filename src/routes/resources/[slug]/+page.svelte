@@ -8,7 +8,7 @@
 </script>
 
 <main class="px-4 pb-20 lg:flex gap-8 xl:px-40 lg:mt-16">
-    <div class="lg:max-w-8/12">
+    <div class="lg:max-w-8/12 xl:w-8/12">
         <CourseInfo course={data.resource}/>
     </div>
 

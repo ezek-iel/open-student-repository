@@ -5,12 +5,12 @@
 <aside class="sidebar">
     <menu class="sidebar-list">
         <li>
-            <Icon icon="tabler:clock" />Pending
+            <Icon icon="tabler:clock-hour-2-filled" />Pending
             <a href="/verify/pending" aria-label="Pending Resources for Review"
             ></a>
         </li>
         <li>
-            <Icon icon="tabler:circle-check-filled" />Reviewed
+            <Icon icon="tabler:circle-check-filled" />Verified
             <a href="/verify/reviewed" aria-label="Verified Resources"></a>
         </li>
         <li>
@@ -19,7 +19,7 @@
         </li>
     </menu>
 
-    <hr class="text-slate-400" />
+    <hr class="text-slate-300" />
     <p class="text-slate-500 font-bold tracking-wide uppercase">
         Filter Category
     </p>
@@ -56,7 +56,7 @@
     @reference "tailwindcss";
 
     .sidebar {
-        @apply hidden w-xs border-r border-r-slate-400 h-full lg:flex flex-col gap-8 p-4;
+        @apply hidden w-xs border-r border-r-slate-300 h-full lg:flex flex-col gap-8 p-4;
     }
 
     .sidebar-list {

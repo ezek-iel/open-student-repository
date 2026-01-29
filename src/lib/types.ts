@@ -15,6 +15,7 @@ export interface Resource {
   date: string;
 }
 
+export type ResourceLevel = "Beginner" | "Intermediate" | "Advanced" | "";
 export type ResourceType = "video" | "research paper" | "courses" | "textbooks";
 
 export interface Operation {
