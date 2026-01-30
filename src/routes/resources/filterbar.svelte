@@ -1,20 +1,15 @@
-<script module>
-    export { type FilterOptions };
-</script>
-
 <script lang="ts">
     import Icon from "@iconify/svelte";
-    import type { Resource, ResourceLevel, ResourceType } from "$lib/types";
-    import { group } from "node:console";
+    import type { Resource, ResourceLevel } from "$lib/types";
 
     let {
         isVisible,
         resources,
-        filterOptions = $bindable(),
+        query,
     }: {
         isVisible: boolean;
         resources: Resource[];
-        filterOptions: FilterOptions;
+        query: string;
     } = $props();
 
     function getCountofType(
@@ -24,16 +19,10 @@
         return count.length;
     }
 
-    let currentLevel: Array<ResourceLevel> & "" = $state("");
-    
-    $effect(function ()  {
-      filterOptions.level = currentLevel as Array<ResourceLevel>
-    })
-
-    interface FilterOptions {
-        level: Array<ResourceLevel>;
-        type: ResourceType;
-    }
+    let currentLevels: Array<ResourceLevel> = $state([]);
+    let resultingUrl = $derived.by(function () {
+        return `/resources?q=${query || ""}&level=` + currentLevels.join("-");
+    });
 </script>
 
 <section class="filter-container" data-visible={isVisible}>
@@ -41,15 +30,29 @@
         <p class="title">Resource Level</p>
         <ul class="level-selection mt-8">
             <li>
-                Beginner <input type="checkbox" bind:group={currentLevel} value="beginner"/>
+                Beginner <input
+                    type="checkbox"
+                    bind:group={currentLevels}
+                    value="Beginner"
+                />
             </li>
             <li>
-                Intermediate <input type="checkbox" bind:group={currentLevel} value="intermediate"/>
+                Intermediate <input
+                    type="checkbox"
+                    bind:group={currentLevels}
+                    value="Intermediate"
+                />
             </li>
-            <li>Advanced <input type="checkbox" bind:group={currentLevel} value="advanced"/></li>
+            <li>
+                Advanced <input
+                    type="checkbox"
+                    bind:group={currentLevels}
+                    value="Advanced"
+                />
+            </li>
         </ul>
-        <button class="btn secondary w-full mt-8"
-            ><Icon icon="tabler:reload" class="size-6" />Refresh</button
+        <a class="btn secondary w-full mt-8" href={resultingUrl}
+            ><Icon icon="tabler:reload" class="size-6" />Refresh</a
         >
     </div>
 

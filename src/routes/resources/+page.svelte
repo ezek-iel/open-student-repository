@@ -1,11 +1,11 @@
 <script lang="ts">
-    import FilterBar, { type FilterOptions } from "./filterbar.svelte";
+    import FilterBar from "./filterbar.svelte";
     import ResourceList from "./resourcelist.svelte";
     import type { Resource } from "$lib/types";
+    import { page } from "$app/state";
 
     let isFilterBarVisible = $state(false);
 
-    let currentFilterOption: FilterOptions = $state({ level: "", type: "" });
     let { data }: { data: { resources: Resource[] } } = $props();
 </script>
 
@@ -13,7 +13,7 @@
     <FilterBar
         isVisible={isFilterBarVisible}
         resources={data.resources}
-        bind:filterOptions={currentFilterOptions}
+        query={page.url.searchParams.get("q")!}
     />
     <ResourceList
         bind:filterBarVisible={isFilterBarVisible}

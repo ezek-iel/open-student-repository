@@ -1,6 +1,6 @@
 import { Resource } from "./schema";
-import { db } from ".";
-import { eq, like } from "drizzle-orm";
+import { db, client } from ".";
+import { eq, like, sql } from "drizzle-orm";
 import type {
   ResourceType,
   Operation,
@@ -9,6 +9,21 @@ import type {
 
 export async function fetchAllResources() {
   return await db.select().from(Resource);
+}
+
+export async function fetchResourcesUsingFTS5(
+  query: string,
+): Promise<{ rows: ResourceParam[] }> {
+  const result = await client.execute(
+    `
+    SELECT resource.*, bm25(resources_fts) AS rank
+    FROM resource
+    JOIN resources_fts ON resource.name = resources_fts.name
+    WHERE resources_fts MATCH ?
+    ORDER BY rank;`,
+    [query],
+  );
+  return { rows: result.rows as unknown as ResourceParam[] };
 }
 
 export async function fetchResourceByID(id: number) {
