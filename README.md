@@ -4,7 +4,7 @@ The **Open Student Repository** is an open-source directory of free and discount
 
 ---
 
-> [!info]  
+> [!TIP]
 > OSR is built **by students, for students**. We encourage student developers to contribute, improve, and expand this project.  
 > For details on contributing, see the [Contribution Guide](CONTRIBUTING.md).  
 
