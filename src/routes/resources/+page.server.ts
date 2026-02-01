@@ -1,7 +1,6 @@
 import type { PageServerLoad } from "./$types";
 import {
   fetchAllResources,
-  fetchResourceBySearchQuery,
   fetchResourcesUsingFTS5,
 } from "$lib/server/db/funcs";
 import type { Resource } from "$lib/types";

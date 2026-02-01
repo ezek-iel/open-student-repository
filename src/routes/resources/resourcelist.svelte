@@ -2,6 +2,7 @@
     import Icon from "@iconify/svelte";
     import ResourceCard from "./resourcecard.svelte";
     import type { Resource } from "$lib/types";
+    import emptySearch from "$lib/assets/empty-search.svg";
 
     let {
         resources,
@@ -27,11 +28,21 @@
         </div>
     </div>
 
-    <div class="cards-container mt-8 md:mt-12">
-        {#each resources as resource, index (index)}
-            <ResourceCard {resource} />
-        {/each}
-    </div>
+    {#if resources.length == 0}
+        <div class=" flex items-center flex-col py-20 text-slate-700">
+            <img src={emptySearch} alt="" class="size-68"/>
+            <p class="font-bold text-3xl">No results found</p>
+            <p class="text-xl mt-2 w-11/12 text-center">
+                Try adjusting your search to find what you are looking for
+            </p>
+        </div>
+    {:else}
+        <div class="cards-container mt-8 md:mt-12">
+            {#each resources as resource, index (index)}
+                <ResourceCard {resource} />
+            {/each}
+        </div>
+    {/if}
 </section>
 
 <style>

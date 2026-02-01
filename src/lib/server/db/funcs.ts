@@ -1,6 +1,6 @@
 import { Resource } from "./schema";
 import { db, client } from ".";
-import { eq, like, sql } from "drizzle-orm";
+import { eq, like } from "drizzle-orm";
 import type {
   ResourceType,
   Operation,
