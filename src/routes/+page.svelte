@@ -1,36 +1,50 @@
 <script lang="ts">
     import searchBackground from "$lib/assets/search-bg.png";
+    import Icon from "@iconify/svelte";
+    import Features from "./features.svelte";
+    import { browser } from "$app/environment";
 </script>
 
 <div
-    class="relative flex flex-col items-center py-40 gap-6 my-4  md:my-12 lg:mx-8 rounded-3xl lg:gap-10 xl:mx-84 xl:my-20 xl:gap-14"
+    class="relative flex flex-col items-center px-6 py-40 gap-6 my-4 md:my-12 lg:mx-8 rounded-3xl lg:gap-10 xl:mx-60 xl:my-20 xl:gap-14"
 >
     <h1
-        class="text-slate-100 text-3xl md:text-4xl text-center font-bold lg:text-5xl xl:text-6xl"
+        class="text-slate-100 text-3xl md:text-4xl text-center font-bold xl:text-5xl"
     >
-        What are you searching for?
+        Find the resources you need to succeed
     </h1>
     <div class="w-full">
         <form
             action="/resources"
             method="GET"
-            class=" md:w-7/12 relative mx-auto"
+            class=" md:w-7/12 relative mx-auto flex"
         >
-            <input
-                type="text"
-                placeholder="Search for a resource"
-                name="q"
-                class="lg:text-2xl md:w-11/12"
-            />
+            {#if browser}
+                <input
+                    type="text"
+                    placeholder="Type a topic, course, or resource…"
+                    name="q"
+                    class="lg:text-2xl md:w-11/12 h-16"
+                    bind:value={
+                        () => localStorage.getItem("currentSearchTerm") || "",
+                        (value: string) =>
+                            localStorage.setItem("currentSearchTerm", value)
+                    }
+                />
+            {/if}
             <button
-                class="icon-btn primary absolute right-2 top-1.25 lg:top-2"
+                class="btn primary absolute self-center right-2"
                 type="submit"
                 aria-label="submit"
-            ></button>
+            >
+                <Icon icon="tabler:search" /> Go
+            </button>
         </form>
     </div>
     <img src={searchBackground} alt="" class="img-background md:rounded-3xl" />
 </div>
+
+<Features />
 
 <style>
     @reference "tailwindcss";

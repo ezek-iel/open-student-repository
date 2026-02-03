@@ -109,7 +109,7 @@
     }
 
     section.filter-container {
-        @apply bg-slate-100 shadow-lg fixed z-2 inset-0 w-84 py-16 px-4 space-y-12 lg:sticky lg:shadow-none lg:p-0 lg:bg-transparent;
+        @apply bg-slate-100 shadow-lg fixed z-2 inset-0 w-84 py-16 px-4 space-y-12 lg:sticky lg:shadow-none lg:px-0 lg:bg-transparent;
     }
 
     section[data-visible="false"] {

@@ -3,6 +3,7 @@
     import logoShort from "$lib/assets/logo-short.svg";
     import Icon from "@iconify/svelte";
     import { resolve } from "$app/paths";
+    import { browser } from "$app/environment";
 </script>
 
 <nav>
@@ -12,7 +13,18 @@
     </a>
 
     <form method="GET" action="/resources" class="flex gap-2 w-6/12">
-        <input type="text" name="q" placeholder="Search Resources" />
+        {#if browser}
+            <input
+                type="text"
+                name="q"
+                placeholder="Search Resources"
+                bind:value={
+                    () => localStorage.getItem("currentSearchTerm") || "",
+                    (value: string) =>
+                        localStorage.setItem("currentSearchTerm", value)
+                }
+            />
+        {/if}
 
         <button class="btn primary search-btn" type="submit"
             ><Icon icon="tabler:search" />Search</button
