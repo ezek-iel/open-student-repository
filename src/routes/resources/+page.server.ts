@@ -1,7 +1,7 @@
 import type { PageServerLoad } from "./$types";
 import {
   fetchAllResources,
-  fetchResourcesUsingFTS5,
+  fetchResourcesUsingPostgres,
 } from "$lib/server/db/funcs";
 import type { Resource } from "$lib/types";
 
@@ -15,12 +15,14 @@ export const load: PageServerLoad = async function ({ url }) {
 
   let resources: Resource[];
   if (!searchTerm) resources = await fetchAllResources();
-  else resources = (await fetchResourcesUsingFTS5(searchTerm)).rows;
+  else
+    resources = (await fetchResourcesUsingPostgres(
+      searchTerm,
+    )) as unknown as Resource[];
 
   if (!levelsString) return { resources };
   const levels = levelsString.split("-");
   resources = resources.filter((resource) => levels.includes(resource.level));
 
-  console.log(resources);
   return { resources };
 };

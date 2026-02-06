@@ -5,12 +5,10 @@
     import Loading from "$lib/components/Loading.svelte";
 
     let { children } = $props();
-
-    console.log(navigating, Boolean(navigating));
 </script>
 
 <svelte:head>
-    <title>OpenStudentRepository</title>
+    <title>Open Student Repository</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg?url" />
 </svelte:head>
 

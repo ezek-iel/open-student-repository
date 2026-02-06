@@ -9,6 +9,7 @@
         <p class="error-title">
             {page.status}!
         </p>
+        <p class="error-subtitle">{page.error.message}</p>
 
         <a href="/" class="btn primary mt-5">Go Home</a>
     </div>
@@ -19,5 +20,9 @@
 
     .error-title {
         @apply text-7xl font-bold mt-4 bg-linear-to-r/oklch from-purple-600 to-indigo-700 bg-clip-text text-transparent;
+    }
+
+    .error-subtitle {
+        @apply text-3xl font-bold mt-4 text-slate-800;
     }
 </style>

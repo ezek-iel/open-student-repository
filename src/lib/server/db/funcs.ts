@@ -11,6 +11,11 @@ export async function fetchAllResources() {
   return await db.select().from(Resource);
 }
 
+/**
+ * Only works on sqlite databases using the libsql client
+ * @param query 
+ * @returns 
+ */
 export async function fetchResourcesUsingFTS5(
   query: string,
 ): Promise<{ rows: ResourceParam[] }> {
@@ -24,6 +29,16 @@ export async function fetchResourcesUsingFTS5(
     [query],
   );
   return { rows: result.rows as unknown as ResourceParam[] };
+}
+
+export async function fetchResourcesUsingPostgres(searchQuery: string) {
+  const result = await client`SELECT id, name, details, type, level, source,
+  ts_rank(search_vector, to_tsquery('english', ${searchQuery})) AS rank
+  FROM public.resource
+  WHERE search_vector @@ to_tsquery('english', ${searchQuery})
+  ORDER BY rank DESC;
+`;
+  return result;
 }
 
 export async function fetchResourceByID(id: number) {

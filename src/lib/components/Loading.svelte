@@ -1,15 +1,70 @@
 <div class="overlay">
-    <p class="text-6xl font-bold gradient-text">Loading....</p>
+    <span class="loader"></span>
 </div>
 
 <style>
     @reference "tailwindcss";
-    
+
     .overlay {
         @apply bg-linear-to-r from-slate-300/90 to-slate-400/80 fixed inset-0 z-2 flex items-center justify-center;
     }
-    
-    .gradient-text {
-        @apply bg-linear-to-br/oklch from-purple-800 to-indigo-800 bg-clip-text text-transparent leading-17;
+
+    .loader {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        position: relative;
+        animation: rotate 1s linear infinite;
+    }
+    .loader::before,
+    .loader::after {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        inset: 0px;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        animation: prixClipFix 2s linear infinite;
+    }
+    .loader::after {
+        border-color: var(--color-purple-600);
+        animation:
+            prixClipFix 2s linear infinite,
+            rotate 0.5s linear infinite reverse;
+        inset: 6px;
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes prixClipFix {
+        0% {
+            clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+        }
+        25% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+        }
+        50% {
+            clip-path: polygon(
+                50% 50%,
+                0 0,
+                100% 0,
+                100% 100%,
+                100% 100%,
+                100% 100%
+            );
+        }
+        75% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+        }
+        100% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+        }
     }
 </style>

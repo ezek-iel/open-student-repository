@@ -32,7 +32,6 @@
     </form>
 
     <ul class="link-list">
-        <li class="btn ghost">Browse</li>
         <li>
             <a href={resolve("/new")} class="btn primary">
                 <Icon icon="tabler:plus" /> Submit Resource
